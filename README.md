@@ -15,3 +15,16 @@ The optimiser used is 8-bit adam and the model is fine-tuned initially on 100 Q&
 
 ### Compute Resources Used 
 The jupyter notebook was hosted on kaggle with 2 GPUs each having a limit of 15GB and the model is loaded on the GPU. 
+
+
+###### Increasing context length using word embeddings
+
+I also researched about different methods to increase the context length of mpt-7b model.
+During the process, I understood that the model contains several block with each block containing MultiHeadAttention & Linear layers.
+
+1. ALiBi approach, which is built into the model. The model does not utilise postional encodings.
+2. xPos: It is the approach which extends the positional embedding by setting the base number in the sin/cos function as an output of a function paramterised by L(Length of sequence).
+3. Linear Scaling & Positional Interpolation : The approach multiplies and divides by L/L* which is the old maximum training length/new_length of the sequence.
+4. RoPe : It is the technique for Rotation Positional Encoding which uses positional encoding along with a rotational transformation.
+   The rotational matrix is multiplied by the Query & Key Matrices.
+   
